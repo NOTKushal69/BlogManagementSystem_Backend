@@ -1,23 +1,25 @@
-const express=require('express');
+const express = require('express');
 const { blogs } = require('./database/connection');
-const { where } = require('sequelize');
-const blogRoutes=require('./Routes/blogsRoutes')
-const cors = require("cors")
-const { createBlog, fetchBlog, updateBlog, singleBlog, deleteBlog } = require('./controller/blogs-controller');
+const blogRoutes = require('./Routes/blogsRoutes');
+const cors = require('cors');
+require('./database/connection');
 
- require('./database/connection');
+const App = express();
 
-
-const App=express();
-// Api creation 
+// Middleware
 App.use(express.json());
+
+// ✅ Allow CORS from your Vercel frontend
 App.use(cors({
-  origin:"*",
-}))
+  origin: "https://blog-management-system-frontend.vercel.app",
+  credentials: true
+}));
 
-App.use("/",blogRoutes)
-// listen port number
+// API Routes
+App.use("/", blogRoutes);
 
-App.listen(3500,()=>{
-  console.log("Well your backend project is running in port number 3500")
-})
+// ✅ Use dynamic port for deployment
+const PORT = process.env.PORT || 3500;
+App.listen(PORT, () => {
+  console.log(`Backend server is running on port ${PORT}`);
+});
