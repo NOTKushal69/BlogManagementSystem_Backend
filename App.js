@@ -18,6 +18,11 @@ App.use(cors({
 // API Routes
 App.use("/", blogRoutes);
 
+App.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
+
+
 // ✅ Use dynamic port for deployment
 const PORT = process.env.PORT || 3500;
 App.listen(PORT, () => {
