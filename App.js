@@ -18,7 +18,7 @@ App.use(cors({
 // API Routes
 App.use("/", blogRoutes);
 
-App.get("/", (req, res) => {
+App.get("/lala", (req, res) => {
   res.send("Backend is working!");
 });
 
